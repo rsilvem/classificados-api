@@ -170,7 +170,7 @@ ALTER TABLE "public"."veiculo_anuncio" ADD CONSTRAINT pkveiculo_anuncio
 	PRIMARY KEY (id);
 
 
-CREATE TABLE proposta
+CREATE TABLE "public"."proposta"
 (
 	id SERIAL NOT NULL primary key,
 	id_anuncio integer,
@@ -179,15 +179,35 @@ CREATE TABLE proposta
 	data_cadastro timestamp default now(),
 	tipo_negociacao varchar(1), -- A - avaliacao profissional, D - negociacao direta
 	aceita boolean,
-	data_aceita_rejeitada date
+	data_aceita_rejeitada date,
+	id_avaliador integer
+);
+
+
+CREATE TABLE "public"."avaliador"
+(
+	id SERIAL NOT NULL primary key,
+	nome VARCHAR(255) NOT NULL,
+	cpf varchar(15),
+	data_nascimento date,
+	email VARCHAR(255) NOT NULL,
+	senha VARCHAR(64) NOT NULL,
+	celular VARCHAR(15) NULL,
+	cidade VARCHAR(255) NOT NULL,
+	estado VARCHAR(2) NOT NULL,
+	valor_avaliacao numeric(17,2),
+	data_cadastro TIMESTAMP NOT NULL
 );
 
 
 
 
 
-
 /************ Add Foreign Keys ***************/
+
+ALTER TABLE "public"."proposta" ADD CONSTRAINT fk_proposta_avaliador
+	FOREIGN KEY (id_avaliador) REFERENCES "public"."avaliador" (id)
+	ON UPDATE NO ACTION ON DELETE NO ACTION;
 
 ALTER TABLE "public"."proposta" ADD CONSTRAINT fk_proposta_usuario
 	FOREIGN KEY (id_usuario) REFERENCES "public"."usuario" (id)
