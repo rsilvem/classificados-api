@@ -1,0 +1,11 @@
+Criar a imagem da app:
+docker build -t node-image -f Dockerfile .
+
+Criar o container da app:
+docker run -d -v %cd%:/home/node/app -p 3000:3000 --link pg-container --rm --name node-container node-image
+
+Parar execução do container:
+docker stop node-container
+
+Ver informação do container como IP:
+docker inspect node-container

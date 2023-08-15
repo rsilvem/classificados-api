@@ -1,0 +1,23 @@
+Criar a imagem:
+docker build -t pg-image -f docker_db/Dockerfile .
+
+Listar imagens:
+docker image ls
+
+Criar o container: (-v especifica volume para não perder dados ao parar o container)
+docker run -d -v %cd%/docker_db/data:/var/lib/postgresql/data --rm --name pg-container pg-image
+
+Listar containers ativos:
+docker ps
+
+Criar as tabelas dentro do banco:
+docker exec -i pg-container psql -U postgres -p 5432 -h localhost classificados < classificados.sql
+
+Acessar bash container:
+docker exec -it pg-container /bin/bash
+
+Parar execução do container:
+docker stop pg-container
+
+Ver informação do container como IP:
+docker inspect pg-container
