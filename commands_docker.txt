@@ -9,3 +9,13 @@ docker stop node-container
 
 Ver informação do container como IP:
 docker inspect node-container
+
+
+Docker Compose:
+
+Subir maquinas:
+docker-compose up -d
+
+Parar maquinas:
+docker-compose stop
+

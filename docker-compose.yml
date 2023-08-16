@@ -1,0 +1,22 @@
+version: "24.0.5"
+services:
+  db: # nao utiliza o Dockerfile
+    image: postgres
+    container_name: pg-container
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres
+      POSTGRES_DB: classificados
+    volumes:
+      - ./docker_db/data:/var/lib/postgresql/data
+    restart: always
+  api: # utiliza o Dockerfile
+    build: "." # local do Dockerfile
+    container_name: node-container
+    restart: always
+    volumes:
+      - .:/home/node/app
+    ports: 
+      - '3000:3000'
+    depends_on:
+      - db
