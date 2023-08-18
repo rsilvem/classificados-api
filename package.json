@@ -7,10 +7,10 @@
     "dotenv": "^15.0.0",
     "express": "^4.17.2",
     "md5": "^2.3.0",
+    "node-oauth2-server": "^2.4.0",
     "nodemon": "^2.0.15",
     "pg": "^8.7.1"
   },
-  "devDependencies": {},
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "nodemon ./bin/server.js"
